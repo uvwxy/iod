@@ -12,7 +12,7 @@ angular.module('IoDApp')
 
     // Public API here
     return {
-      temperatureConfig: function (chartTitle, cb) {
+      lineChart: function (chartTitle, xLabel, yLabel) {
         return {
           chart: {
             type: 'lineChart',
@@ -30,37 +30,18 @@ angular.module('IoDApp')
               return d.y;
             },
             useInteractiveGuideline: true,
-            dispatch: {
-              stateChange: function (e) {
-                console.log("stateChange");
-              },
-              changeState: function (e) {
-                console.log("changeState");
-              },
-              tooltipShow: function (e) {
-                console.log("tooltipShow");
-              },
-              tooltipHide: function (e) {
-                console.log("tooltipHide");
-              }
-            },
             xAxis: {
-              axisLabel: 'Time/Date',
+              axisLabel: xLabel,
               tickFormat: function (d) {
                 return d3.time.format('%d-%b')(new Date(d));
               }
             },
             yAxis: {
-              axisLabel: 'Temperature (C)',
+              axisLabel: yLabel,
               tickFormat: function (d) {
                 return d3.format('.02f')(d);
               },
               axisLabelDistance: -10
-            },
-            callback: function (chart) {
-              if(cb){
-                cb();
-              }
             }
           },
           title: {
