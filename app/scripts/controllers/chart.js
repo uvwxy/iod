@@ -7,7 +7,7 @@
  * # ChartCtrl
  * Controller of the webappSrcApp
  */
-angular.module('webappSrcApp')
+angular.module('IoDApp')
   .controller('ChartCtrl', function ($scope, $http) {
     $scope.options = {
       chart: {
@@ -42,7 +42,7 @@ angular.module('webappSrcApp')
         },
         xAxis: {
           axisLabel: 'Time (ms)',
-          tickFormat: function(d){
+          tickFormat: function (d) {
             return d3.time.format('%d-%b')(new Date(d));
           }
         },
@@ -63,35 +63,13 @@ angular.module('webappSrcApp')
       }
     };
 
-    $http.get('/data').then(function (response) {
+    $scope.data = [];
+
+    $http.get('/api/linechart/data').then(function (response) {
       console.log('success', response);
+      $scope.data = response.data;
     }, function (response) {
       console.log('fail', response);
     });
-
-    $scope.data = sinAndCos();
-
-    /*Random Data Generator */
-    function sinAndCos() {
-      var sin = [], sin2 = [],
-        cos = [];
-
-      //Data is represented as an array of {x,y} pairs.
-      for (var i = 0; i < 100; i++) {
-        sin.push({x: i, y: Math.sin(i / 10)});
-        sin2.push({x: i, y: i % 10 == 5 ? null : Math.sin(i / 10) * 0.25 + 0.5});
-        cos.push({x: i, y: .5 * Math.cos(i / 10 + 2) + Math.random() / 10});
-      }
-
-
-      console.log(sin);
-      //Line chart data should be sent as an array of series objects.
-      return [{
-        values: cos,
-        key: 'Cosine Wave',
-        color: '#2ca02c'
-      }
-      ];
-    };
 
   });

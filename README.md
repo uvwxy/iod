@@ -19,7 +19,7 @@ The python server requires `simplejson` and `cherrypy`.
 
 ```
 sudo easy_install cherrypy
-sudo easy_install simplejson
+sudo easy_install jsonpickle
 ```
 
 ## Running
@@ -27,7 +27,7 @@ sudo easy_install simplejson
 
 ```
 grunt build
-python server.py
+python server.py        # requires server.py, pyod/ and dist/
 ```
 
 

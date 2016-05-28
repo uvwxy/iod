@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the webappSrcApp
  */
-angular.module('webappSrcApp')
+angular.module('IoDApp')
   .controller('MainCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
