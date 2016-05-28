@@ -33,7 +33,7 @@ angular.module('IoDApp')
             xAxis: {
               axisLabel: xLabel,
               tickFormat: function (d) {
-                return d3.time.format('%d-%b')(new Date(d));
+                return d3.time.format('%d-%b-%y %H:%M:%S')(new Date(d));
               }
             },
             yAxis: {

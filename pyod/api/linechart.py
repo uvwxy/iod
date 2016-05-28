@@ -1,7 +1,7 @@
 import cherrypy
 import jsonpickle as jp
 import random
-
+import sqlite3
 
 class Entry:
   x = 0
@@ -29,8 +29,19 @@ class LineChartApi:
     lcd = LineChartData("MyData");
 
     lcd.values = [];
-    for i in range(1,100):
-      lcd.values.append(Entry(i,random.random()))
+    con = sqlite3.connect('IoDdb.sqlite')
+    cur = con.cursor()
+    cur.execute("SELECT * FROM WohnzimmerFeuchte2")
+    rows = cur.fetchall()
+
+    for row in rows:
+      x = int(row[0]) * 1000
+      y = float(row[1])
+      lcd.values.append(Entry(x, y))
+
+    con.close()
+    # for i in range(1,100):
+    #  lcd.values.append(Entry(i,random.random()))
 
 
     result = [lcd]
