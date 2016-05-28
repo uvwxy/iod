@@ -9,7 +9,7 @@
  */
 angular.module('IoDApp')
   .controller('ChartCtrl', function ($scope, $http, chartConfig) {
-    $scope.options = chartConfig.lineChart("Indor Temperature", "Time", "Temperature (C)");
+    $scope.options = chartConfig.lineChart("Indoor Temperature", "Time", "Temperature (C)");
     $scope.data = [];
 
     $http.get('/api/linechart/data').then(function (response) {
